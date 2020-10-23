@@ -21,9 +21,8 @@ if (mouse_check_button_pressed(mb_left)) {
 if (mouse_check_button_released(mb_left) and object_held_id != noone) {
 	with (object_held_id) {
 		// Drop zone
-		if (position_meeting(x, y, o_dropzone)) {
-			if (food_type == global.orders[global.orders_index]) {
-				instance_destroy();
+		if (position_meeting(x, y, o_deliver)) {
+			if (food_type == global.current_order) {
 				global.money += price;
 				global.orders_index++;
 			}
