@@ -2,4 +2,4 @@
 // You can write your code in this editor
 event_inherited();
 food_type = "Pretzel";
-price = 5;
+price = 5.00;

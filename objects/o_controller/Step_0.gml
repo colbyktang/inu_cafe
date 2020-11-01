@@ -13,7 +13,8 @@ if (mouse_check_button_pressed(mb_left)) {
 			image_xscale = 0.8;
 			image_yscale = 0.8;
 			depth = -1000; 
-		}	
+		}
+		audio_play_sound(snd_pickup, 50, false);
 	}
 }
 
@@ -22,10 +23,22 @@ if (mouse_check_button_released(mb_left) and object_held_id != noone) {
 	with (object_held_id) {
 		// Drop zone
 		if (position_meeting(x, y, o_deliver)) {
+			show_debug_message("Food Type: " + food_type);
+			show_debug_message("Current Order: " + global.current_order);
+
 			if (food_type == global.current_order) {
-				global.money += price;
-				global.orders_index++;
+				with (o_game) {
+					global.food_received = true;
+					event_user(1);	
+				}
+				audio_play_sound(Correct, 50, false);
 			}
+			else {
+				audio_play_sound(dull_pop, 50, false);	
+			}
+		}
+		else {
+			audio_play_sound(Woosh, 50, false);	
 		}
 		image_xscale = 1;
 		image_yscale = 1;
